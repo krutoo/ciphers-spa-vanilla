@@ -15,18 +15,21 @@ export default class AffineForm extends Component {
 		};
 		this.children = {
 			textareaMessage: new Textarea({
+				id: 'affine-message-field',
 				rows: 5,
 				className: 'full-width',
 				placeholder: 'Сообщение',
 				onchange: `${this.passToAttribute('update')}({message: this.value, encrypted: this.value});`,
 			}),
 			keyAField: new Input({
+				id: 'affine-key-a-field',
 				type: 'number',
 				className: 'full-width',
 				placeholder: 'Ключ шифра A',
 				onchange: `${this.passToAttribute('update')}({keyA: this.value});`,
 			}),
 			keyBField: new Input({
+				id: 'affine-key-b-field',
 				type: 'number',
 				className: 'full-width',
 				placeholder: 'Ключ шифра B',
@@ -77,27 +80,21 @@ export default class AffineForm extends Component {
 		return `
 			<section>
 				<h2>Афинный шифр</h2>
-				<label>
-					Исходное сообщение<br>
+				<label for="affine-message-field">Исходное сообщение</label>
 					${this.children.textareaMessage.render({
 						value: this.data.message,
 					})}
-				</label>
+
 				<br>
-				<label>
-					Компонент ключа шифра A<br>
-					${this.children.keyAField.render({
-						value: this.data.keyA,
-					})}
-				</label>
+				<label for="affine-key-a-field">Компонент ключа шифра A</label>
+				${this.children.keyAField.render({
+					value: this.data.keyA,
+				})}
 				<br>
-				<label>
-					Компонент ключа шифра B<br>
-					${this.children.keyBField.render({
-						value: this.data.keyB,
-					})}
-				</label>
-				<br>
+				<label for="affine-key-b-field">Компонент ключа шифра B</label>
+				${this.children.keyBField.render({
+					value: this.data.keyB,
+				})}
 				<p class="align-right">
 					<button onclick="${this.passToAttribute('encrypt')}();">Зашифровать</button>
 					<button onclick="${this.passToAttribute('decrypt')}();">Расшифровать</button>

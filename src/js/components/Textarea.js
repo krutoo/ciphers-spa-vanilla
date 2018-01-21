@@ -6,7 +6,7 @@ export default class Textarea extends Component {
 
 		return `
 			<textarea
-				id="${options.className || ''}"
+				id="${options.id || ''}"
 				placeholder="${options.placeholder || ''}"
 				class="${options.className || ''} ${options.error ? 'error' : ''}"
 				onchange="${options.onchange || ''}"

@@ -13,12 +13,14 @@ export default class CaesarForm extends Component {
 		};
 		this.children = {
 			messageField: new Textarea({
+				id: 'caesar-message-field',
 				rows: 5,
 				className: 'full-width',
 				placeholder: 'Сообщение',
 				onchange: `${this.passToAttribute('update')}({message: this.value, encrypted: this.value});`,
 			}),
 			keyField: new Input({
+				id: 'caesar-key-field',
 				type: 'number',
 				className: 'full-width',
 				placeholder: 'Ключ шифра',
@@ -49,20 +51,15 @@ export default class CaesarForm extends Component {
 		return `
 			<section>
 				<h2>Шифр Цезаря</h2>
-				<label>
-					Исходное сообщение<br>
-					${this.children.messageField.render({
-						value: this.data.message,
-					})}
-				</label>
+				<label for="caesar-message-field">Исходное сообщение</label>
+				${this.children.messageField.render({
+					value: this.data.message,
+				})}
 				<br>
-				<label>
-					Ключ шифра<br>
-					${this.children.keyField.render({
-						value: this.data.key,
-					})}
-				</label>
-				<br>
+				<label for="caesar-key-field">Ключ шифра</label>
+				${this.children.keyField.render({
+					value: this.data.key,
+				})}
 				<p class="align-right">
 					<button onclick="${this.passToAttribute('encrypt')}();">Зашифровать</button>
 					<button onclick="${this.passToAttribute('decrypt')}();">Расшифровать</button>

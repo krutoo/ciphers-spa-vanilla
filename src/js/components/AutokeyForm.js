@@ -13,12 +13,14 @@ export default class AutokeyForm extends Component {
 		};
 		this.children = {
 			messageField: new Textarea({
+				id: 'autokey-message-field',
 				rows: 5,
 				className: 'full-width',
 				placeholder: 'Сообщение',
 				onchange: `${this.passToAttribute('update')}({message: this.value, encrypted: this.value});`,
 			}),
 			keyField: new Input({
+				id: 'autokey-key-field',
 				type: 'number',
 				className: 'full-width',
 				placeholder: 'Ключ шифра',
@@ -49,19 +51,15 @@ export default class AutokeyForm extends Component {
 		return `
 			<section>
 				<h2>Автоключевой шифр</h2>
-				<label>
-					Исходное сообщение<br>
-					${this.children.messageField.render({
-						value: this.data.message,
-					})}
-				</label>
+				<label for="autokey-message-field">Исходное сообщение</label>
+				${this.children.messageField.render({
+					value: this.data.message,
+				})}
 				<br>
-				<label>
-					Ключ шифра<br>
-					${this.children.keyField.render({
-						value: this.data.key,
-					})}
-				</label>
+				<label for="autokey-key-field">Ключ шифра</label>
+				${this.children.keyField.render({
+					value: this.data.key,
+				})}
 				<p class="align-right">
 					<button onclick="${this.passToAttribute('encrypt')}();">Зашифровать</button>
 					<button onclick="${this.passToAttribute('decrypt')}();">Расшифровать</button>

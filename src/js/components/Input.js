@@ -6,7 +6,7 @@ export default class Input extends Component {
 
 		return `
 			<input
-				id="${options.className || ''}"
+				id="${options.id || ''}"
 				placeholder="${options.placeholder || ''}"
 				class="${options.className || ''} ${options.error ? 'error' : ''}"
 				onchange="${options.onchange || ''}"

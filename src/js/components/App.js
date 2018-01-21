@@ -15,6 +15,7 @@ export default class App extends Component {
 		};
 		this.children = {
 			alphabetField: new Input({
+				id: 'alphabet-field',
 				className: 'full-width',
 				onchange: `${this.passToAttribute('changeAlphabet')}(this.value);`
 			}),
@@ -53,12 +54,10 @@ export default class App extends Component {
 			<h1>Шифрование</h1>
 			<section id="section-alphabet">
 				<h2>Алфавит</h2>
-				<label>
-					Алфавит, который будет использоваться в работе всех шифров<br>
-					${this.children.alphabetField.render({
-						value: this.data.alphabet,
-					})}
-				</label>
+				<label for="alphabet-field">Алфавит, который будет использоваться в работе всех шифров</label>
+				${this.children.alphabetField.render({
+					value: this.data.alphabet,
+				})}
 			</section>
 			<hr>
 			${this.children.caesarForm.render()}
