@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Реализация различных методов шифрования на JavaScript">
+	<title>Ciphers</title>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&amp;subset=cyrillic" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./build/style.css">
+</head>
+<body>
+	<noscript>
+		<h3>Для работы необходимо включить JavaScript в браузере</h3>
+	</noscript>
+	<div class="main-container">
+		<h1>Шифрование</h1>
+		<section id="section-alphabet">
+			<h2>Алфавит</h2>
+			<label>
+				Алфавит, который будет использоваться в работе всех шифров
+				<input class="full-width" type="text" id="input-alphabet" placeholder="Алфавит" value="abcdefghijklmnopqrstuvwxyz">
+			</label>
+			<p></p>
+		</section>
+		<section id="section-caesar">
+			<h2>Шифр Цезаря</h2>
+			<p>
+				<label>
+					Исходное сообщение<br>
+					<textarea class="full-width" id="input-caesar-message" placeholder="Сообщение"></textarea>
+				</label>
+			</p>
+			<p>
+				<label>
+					Ключ шифра<br>
+					<input type="number" id="input-caesar-key" placeholder="Ключ шифра">
+				</label>
+			</p>
+			<p>
+				<label>
+					Результат шифрования<br>
+					<textarea class="full-width" id="input-caesar-result" placeholder="Результат"></textarea>
+				</label>
+			</p>
+			<p>
+				<button id="button-caesar-encrypt">Зашифровать</button>
+				<button id="button-caesar-decrypt">Расшифровать</button>
+			</p>
+		</section>
+		<hr>
+		<section id="section-multiplicative">
+			<h2>Мультипликативный шифр</h2>
+			<p>
+				<label>
+					Исходное сообщение<br>
+					<textarea class="full-width" id="input-multiplicative-message" placeholder="Сообщение"></textarea>
+				</label>
+			</p>
+			<p>
+				<label>
+					Ключ шифра<br>
+					<input type="number" id="input-multiplicative-key" placeholder="Ключ шифра">
+				</label>
+			</p>
+			<p>
+				<label>
+					Результат шифрования<br>
+					<textarea class="full-width" id="input-multiplicative-result" placeholder="Результат"></textarea>
+				</label>
+			</p>
+			<p>
+				<button id="button-multiplicative-encrypt">Зашифровать</button>
+				<button id="button-multiplicative-decrypt">Расшифровать</button>
+			</p>
+			<br>
+			<h3>Подсказка</h3>
+			<p>В мультипликативном шифре алгоритм шифрования применяет умножение исходного текста ключом, а алгоритм дешифрования применяет деление зашифрованного текста ключом.</p>
+			<br>
+			<h3>Ограничения</h3>
+			<ul>
+				<li>Символы, не встречающиеся в алфавите, не шифруются;</li>
+				<li>значение ключа должно быть выбрано таким, что ключ и длина алфавита - взаимно простые числа;</li>
+				<li>модуль ключа шифра не должен превышать длину алфавита.</li>
+			</ul>
+		</section>
+		<hr>
+		<section id="section-affine">
+			<h2>Афинный шифр</h2>
+			<p>
+				<label>
+					Исходное сообщение<br>
+					<textarea class="full-width" id="input-affine-message" placeholder="Сообщение"></textarea>
+				</label>
+			</p>
+			<p>
+				<label>
+					<b>a</b>, первый компонент ключа шифра<br>
+					<input type="number" id="input-affine-a-key" placeholder="компонент ключа">
+				</label>
+			</p>
+			<p>
+				<label>
+					<b>b</b>, второй компонент ключа шифра<br>
+					<input type="number" id="input-affine-b-key" placeholder="компонент ключа">
+				</label>
+			</p>
+			<p>
+				<label>
+					Результат шифрования<br>
+					<textarea class="full-width" id="input-affine-result" placeholder="Результат"></textarea>
+				</label>
+			</p>
+			<p>
+				<button id="button-affine-encrypt">Зашифровать</button>
+				<button id="button-affine-decrypt">Расшифровать</button>
+			</p>
+			<br>
+			<h3>Подсказка</h3>
+			<p>
+				Формула для шифрования символа:<br>
+				<code>y = (ax + b) % n</code>, где<br>
+				<ul>
+					<li><code>a, b</code> - компоненты шифра;</li>
+					<li><code>n</code> - длина алфавита;</li>
+					<li><code>x</code> - исходная позиция символа в алфавите.</li>
+				</ul>
+			</p>
+			<p>
+				Формула для расшифровки символа:<br>
+				<code>x = (a<sup>-1</sup> * (y - b)) % n</code>, где<br>
+				<ul>
+					<li><code>a<sup>-1</sup></code> - обратное по модулю <code>n</code> число к <code>a</code>;</li>
+					<li><code>y</code> - позиция зашифрованного символа в алфавите.</li>
+				</ul>
+			</p>
+			<h3>Ограничения</h3>
+			<ul>
+				<li>Символы, не встречающиеся в алфавите, не шифруются;</li>
+				<li>значение <code>a</code> должно быть выбрано таким, что <code>a</code> и <code>n</code> - взаимно простые числа;</li>
+				<li>модуль компонента ключа шифра <code>b</code> не должен превышать длину алфавита.</li>
+			</ul>
+		</section>
+		<hr>
+		<footer id="copyright">(c) Дмитрий Петров</footer>
+	</div>
+	<script src="./build/bundle.js"></script>
+</body>
+</html>

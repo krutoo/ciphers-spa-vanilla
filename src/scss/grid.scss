@@ -1,0 +1,11 @@
+.row {
+	.col {
+		@for $i from 1 through 12 {
+			&#{$i} {
+				flex: 0 0 auto;
+				flex-basis: $i / 12 * 100%;
+				max-width: $i / 12 * 100%;
+			}
+		}
+	}
+}

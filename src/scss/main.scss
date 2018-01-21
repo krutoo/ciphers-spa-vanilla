@@ -1,0 +1,55 @@
+@import 'variables.scss';
+@import 'typography.scss';
+@import 'control.scss';
+@import 'control.scss';
+@import 'grid.scss';
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	background-color: $main-background-color;
+	color: $main-text-color;
+	font-size: 16px;
+	font-family: 'Ubuntu', sans-serif;
+	overflow-x: hidden;
+}
+
+.main-container {
+	max-width: 720px;
+	margin: auto;
+	padding: 1rem;
+}
+
+.full-width {
+	width: 100%!important;
+}
+
+.updated {
+	animation: updated .5s ease-out;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.error-message {
+	color: #e74c3c;
+}
+
+@keyframes updated {
+	0% {
+		transform: scale(1.1);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}

@@ -1,0 +1,53 @@
+@import './variables.scss';
+
+input,
+textarea,
+button {
+	display: inline-block;
+	width: auto;
+	min-width: auto;
+	max-width: 100%;
+	margin: .5rem 0;
+	font-size: inherit;
+	font-family: inherit;
+	padding: .5rem;
+	background-color: transparent;
+	color: inherit;
+	border: .2rem solid $input-primary-color;
+	border-radius: $input-border-radius;
+	transition: box-shadow .2s ease-in-out;
+
+	&.error {
+		border-color: #e74c3c;
+	}
+}
+
+input:focus,
+textarea:focus,
+button:focus {
+	box-shadow: 0 0 0 .2rem $input-focus-color;
+	border-color: $input-focus-color;
+}
+
+button,
+input[type=button],
+input[type=submit] {
+	padding: .5rem 1rem;
+	background-color: $button-primary-color;
+	border-color: $button-primary-color;
+	color: $button-primary-text-color;
+	font-weight: bold;
+
+	@media screen and (max-width: $screen-width-small) {
+		width: 100%;
+	}
+}
+
+button:active,
+input[type=button]:active,
+input[type=submit]:active {
+	background-color: $input-focus-color;
+	border-color: $input-focus-color;
+	color: #fff;
+	font-weight: bold;
+}
