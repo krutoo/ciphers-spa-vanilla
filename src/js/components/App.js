@@ -4,6 +4,7 @@ import CaesarForm from './CaesarForm'
 import MultiplicativeForm from './MultiplicativeForm'
 import AffineForm from './AffineForm'
 import AutokeyForm from './AutokeyForm'
+import VigenereForm from './VigenereForm'
 import { string } from '../helpers/utils'
 
 export default class App extends Component {
@@ -31,6 +32,9 @@ export default class App extends Component {
 			autokeyForm: new AutokeyForm({
 				alphabet: this.data.alphabet,
 			}),
+			vigenereForm: new VigenereForm({
+				alphabet: this.data.alphabet,
+			})
 		};
 	}
 
@@ -67,6 +71,8 @@ export default class App extends Component {
 			${this.children.affineForm.render()}
 			<hr>
 			${this.children.autokeyForm.render()}
+			<hr>
+			${this.children.vigenereForm.render()}
 			<hr>
 			<footer id="copyright">(c) ${this.data.author}, ${new Date().getFullYear()}</footer>
 		`;

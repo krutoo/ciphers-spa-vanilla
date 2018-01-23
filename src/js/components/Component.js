@@ -1,4 +1,11 @@
+/**
+ * Basic component class
+ */
 export default class Component {
+	/**
+	 * Constructor
+	 * @param {Object} options Component options
+	 */
 	constructor(options) {
 		window.componentsRegistry = Array.isArray(window.componentsRegistry) ? window.componentsRegistry : [];
 		this._id = window.componentsRegistry.length;
@@ -7,6 +14,11 @@ export default class Component {
 		window.componentsRegistry.push(this);
 	}
 
+	/**
+	 * Return string to parse to HTML
+	 * @param {Object} newOptions New component options
+	 * @return {string} string to parse to HTML
+	 */
 	render(newOptions) {
 		this.update({}, newOptions);
 		let rootElement = document.querySelector(`[data-component-id="${this._id}"]`),
@@ -19,6 +31,11 @@ export default class Component {
 		return `<div data-component-id="${this._id}">${html}</div>`;
 	}
 
+	/**
+	 * Update data and options of component
+	 * @param {Object} newData New component data
+	 * @param {Object} newOptions new component options
+	 */
 	update(newData, newOptions) {
 		newData = newData || {};
 		newOptions = newOptions || {};
@@ -26,6 +43,11 @@ export default class Component {
 		this.options = Object.assign(this.options, newOptions);
 	}
 
+	/**
+	 * Returns string, which is which you can use in attribute of element in template method
+	 * @param {string} propertyKey Key of property or method
+	 * @return {string} String to use in attribute
+	 */
 	passToAttribute(propertyKey) {
 		return `window.componentsRegistry[${this._id}].${propertyKey}`;
 	}
