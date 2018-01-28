@@ -8,4 +8,4 @@ List of ciphers:
 * Autokey
 * Vigenere
 
-See the demo [here](krutoo.github.io/ciphers-spa-vanilla/)
+See the demo [here](https://krutoo.github.io/ciphers-spa-vanilla/)
