@@ -15,7 +15,7 @@ export default class Component {
 	}
 
 	/**
-	 * Return string to parse to HTML
+	 * Render a component
 	 * @param {Object} newOptions New component options
 	 * @return {string} string to parse to HTML
 	 */
@@ -32,9 +32,18 @@ export default class Component {
 	}
 
 	/**
+	 * Return string to parse to HTML. Need to be redefined in the child class
+	 * @param {Object} options Component options
+	 * @return {string} string to parse to HTML
+	 */
+	template(options) {
+		return '';
+	}
+
+	/**
 	 * Update data and options of component
 	 * @param {Object} newData New component data
-	 * @param {Object} newOptions new component options
+	 * @param {Object} newOptions New component options
 	 */
 	update(newData, newOptions) {
 		newData = newData || {};

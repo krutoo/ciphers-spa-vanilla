@@ -1,8 +1,11 @@
-import Component from './Component'
-import Textarea from './Textarea'
-import Input from './Input'
-import { autokey } from '../helpers/ciphers'
+import Component from './Component';
+import Textarea from './Textarea';
+import Input from './Input';
+import { autokey } from '../helpers/ciphers';
 
+/**
+ * Autokey cipher form component class
+ */
 export default class AutokeyForm extends Component {
 	constructor(options) {
 		super(options);
@@ -29,6 +32,9 @@ export default class AutokeyForm extends Component {
 		};
 	}
 
+	/**
+	 * Encrypt input message
+	 */
 	encrypt() {
 		this.update({
 			encrypted: autokey(this.data.message, this.options.alphabet, this.data.key),
@@ -38,6 +44,9 @@ export default class AutokeyForm extends Component {
 		});
 	}
 
+	/**
+	 * Decrypt input message
+	 */
 	decrypt() {
 		this.update({
 			message: autokey(this.data.encrypted, this.options.alphabet, this.data.key, true),
@@ -47,6 +56,7 @@ export default class AutokeyForm extends Component {
 		});
 	}
 
+	/** @inheritDoc */
 	template() {
 		return `
 			<section>

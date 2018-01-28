@@ -1,4 +1,4 @@
-import { classOf, math, string } from './utils.js'
+import { classOf, math, string } from './utils.js';
 
 /**
  * Encrypts/Decrypts the message with an Caesar cipher.
@@ -18,7 +18,7 @@ export const caesar = (message, alphabet, shift) => {
 		// to Array of characters
 		.split('')
 		// replace characters to indexes in alphabet
-		.map(char => alphabet.indexOf(char) != -1 ? alphabet.indexOf(char) : char)
+		.map(char => alphabet.indexOf(char) !== -1 ? alphabet.indexOf(char) : char)
 		// get new index of character
 		// if is NaN then is character are is not in alphabet and we do not process it
 		.map(item => classOf(item) === 'Number' ? item + shift : item)
@@ -144,14 +144,14 @@ export const vigenere = (message, alphabet, key, decrypt) => {
 	key = key
 		.slice(0, message.length) // make key length to equal message length
 		.split('') // convert to Array
-		.map(char => alphabet.indexOf(char) != -1 ? alphabet.indexOf(char) : char) // replace characters to indexes
+		.map(char => alphabet.indexOf(char) !== -1 ? alphabet.indexOf(char) : char) // replace characters to indexes
 		.filter(char => classOf(char) === 'Number'); // remove characters which are not in alphabet
 
 	message = message
 		// remove characters which are not in alphabet
 		.filter(item => alphabet.indexOf(item) !== -1)
 		// replace characters to indexes in alphabet
-		.map(char => alphabet.indexOf(char) != -1 ? alphabet.indexOf(char) : char)
+		.map(char => alphabet.indexOf(char) !== -1 ? alphabet.indexOf(char) : char)
 		// use encryption/decryption function
 		// if is NaN then is character are is not in alphabet and we do not process it
 		.map((item, index) => classOf(item) === 'Number' ? item + (decrypt ? -key[index] : key[index]) : item)

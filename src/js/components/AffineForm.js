@@ -1,9 +1,12 @@
-import Component from './Component'
-import Textarea from './Textarea'
-import Input from './Input'
-import { affine } from '../helpers/ciphers'
-import { math } from '../helpers/utils'
+import Component from './Component';
+import Textarea from './Textarea';
+import Input from './Input';
+import { affine } from '../helpers/ciphers';
+import { math } from '../helpers/utils';
 
+/**
+ * Affine cipher form component class
+ */
 export default class AffineForm extends Component {
 	constructor(options) {
 		super(options);
@@ -38,6 +41,9 @@ export default class AffineForm extends Component {
 		};
 	}
 
+	/**
+	 * Encrypt input message
+	 */
 	encrypt() {
 		let keyA = this.data.keyA,
 			keyB = this.data.keyB,
@@ -59,6 +65,9 @@ export default class AffineForm extends Component {
 		});
 	}
 
+	/**
+	 * Decrypt input message
+	 */
 	decrypt() {
 		let encrypted = this.data.encrypted,
 			alphabet = this.options.alphabet,
@@ -76,6 +85,7 @@ export default class AffineForm extends Component {
 		});
 	}
 
+	/** @inheritDoc */
 	template() {
 		return `
 			<section>

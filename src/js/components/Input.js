@@ -1,6 +1,10 @@
-import Component from './Component'
+import Component from './Component';
 
+/**
+ * Input component class
+ */
 export default class Input extends Component {
+	/** @inheritDoc */
 	template(options) {
 		options = options || {};
 

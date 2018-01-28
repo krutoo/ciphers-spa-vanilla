@@ -1,12 +1,15 @@
-import Component from './Component'
-import Input from './Input'
-import CaesarForm from './CaesarForm'
-import MultiplicativeForm from './MultiplicativeForm'
-import AffineForm from './AffineForm'
-import AutokeyForm from './AutokeyForm'
-import VigenereForm from './VigenereForm'
-import { string } from '../helpers/utils'
+import Component from './Component';
+import Input from './Input';
+import CaesarForm from './CaesarForm';
+import MultiplicativeForm from './MultiplicativeForm';
+import AffineForm from './AffineForm';
+import AutokeyForm from './AutokeyForm';
+import VigenereForm from './VigenereForm';
+import { string } from '../helpers/utils';
 
+/**
+ * Main app component class
+ */
 export default class App extends Component {
 	constructor(options) {
 		super(options);
@@ -38,6 +41,10 @@ export default class App extends Component {
 		};
 	}
 
+	/**
+	 * Change alphabet
+	 * @param  {string} alphabet Alphabet
+	 */
 	changeAlphabet(alphabet) {
 		alphabet = string.removeDuplicates(alphabet);
 		this.update({
@@ -53,6 +60,7 @@ export default class App extends Component {
 		});
 	}
 
+	/** @inheritDoc */
 	template() {
 		return `
 			<h1>Шифрование</h1>

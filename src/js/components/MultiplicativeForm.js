@@ -1,9 +1,12 @@
-import Component from './Component'
-import Textarea from './Textarea'
-import Input from './Input'
-import { multiplicative } from '../helpers/ciphers'
-import { math } from '../helpers/utils'
+import Component from './Component';
+import Textarea from './Textarea';
+import Input from './Input';
+import { multiplicative } from '../helpers/ciphers';
+import { math } from '../helpers/utils';
 
+/**
+ * Multiplicative cipher form component class
+ */
 export default class MultiplicativeForm extends Component {
 	constructor(options) {
 		super(options);
@@ -30,6 +33,9 @@ export default class MultiplicativeForm extends Component {
 		};
 	}
 
+	/**
+	 * Encrypt input message
+	 */
 	encrypt() {
 		let encrypted = multiplicative(this.data.message, this.options.alphabet, this.data.key),
 			error = math.isCoprime(this.data.key, this.options.alphabet.length)
@@ -48,6 +54,9 @@ export default class MultiplicativeForm extends Component {
 		});
 	}
 
+	/**
+	 * Decrypt input message
+	 */
 	decrypt() {
 		let encrypted = this.data.encrypted,
 			alphabet = this.options.alphabet,
@@ -63,6 +72,7 @@ export default class MultiplicativeForm extends Component {
 		});
 	}
 
+	/** @inheritDoc */
 	template() {
 		return `
 			<section>

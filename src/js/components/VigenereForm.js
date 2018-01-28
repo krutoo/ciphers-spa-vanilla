@@ -1,8 +1,11 @@
-import Component from './Component'
-import Textarea from './Textarea'
-import Input from './Input'
-import { vigenere } from '../helpers/ciphers'
+import Component from './Component';
+import Textarea from './Textarea';
+import Input from './Input';
+import { vigenere } from '../helpers/ciphers';
 
+/**
+ * Vigenere cipher form component class
+ */
 export default class VigenereForm extends Component {
 	constructor(options) {
 		super(options);
@@ -29,6 +32,9 @@ export default class VigenereForm extends Component {
 		};
 	}
 
+	/**
+	 * Encrypt input message
+	 */
 	encrypt() {
 		this.update({
 			encrypted: vigenere(this.data.message, this.options.alphabet, this.data.key),
@@ -38,6 +44,9 @@ export default class VigenereForm extends Component {
 		});
 	}
 
+	/**
+	 * Decrypt input message
+	 */
 	decrypt() {
 		this.update({
 			message: vigenere(this.data.encrypted, this.options.alphabet, this.data.key, true),
@@ -47,6 +56,7 @@ export default class VigenereForm extends Component {
 		});
 	}
 
+	/** @inheritDoc */
 	template() {
 		return `
 			<section>
