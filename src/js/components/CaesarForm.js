@@ -1,8 +1,11 @@
-import Component from './Component'
-import Textarea from './Textarea'
-import Input from './Input'
-import { caesar } from '../helpers/ciphers'
+import Component from './Component';
+import Textarea from './Textarea';
+import Input from './Input';
+import { caesar } from '../helpers/ciphers';
 
+/**
+ * Caesar cipher form component class
+ */
 export default class CaesarForm extends Component {
 	constructor(options) {
 		super(options);
@@ -29,6 +32,9 @@ export default class CaesarForm extends Component {
 		};
 	}
 
+	/**
+	 * Encrypt input message
+	 */
 	encrypt() {
 		this.update({
 			encrypted: caesar(this.data.message, this.options.alphabet, this.data.key),
@@ -38,6 +44,9 @@ export default class CaesarForm extends Component {
 		});
 	}
 
+	/**
+	 * Decrypt input message
+	 */
 	decrypt() {
 		this.update({
 			message: caesar(this.data.encrypted, this.options.alphabet, -this.data.key),
@@ -47,6 +56,7 @@ export default class CaesarForm extends Component {
 		});
 	}
 
+	/** @inheritDoc */
 	template() {
 		return `
 			<section>

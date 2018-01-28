@@ -1,4 +1,4 @@
-import { classOf, math, string } from './utils.js'
+import { classOf, math, string } from './utils.js';
 
 /**
  * Encrypts/Decrypts the message with an Caesar cipher.
@@ -18,8 +18,9 @@ export const caesar = (message, alphabet, shift) => {
 		// to Array of characters
 		.split('')
 		// replace characters to indexes in alphabet
-		.map(char => alphabet.indexOf(char) != -1 ? alphabet.indexOf(char) : char)
+		.map(char => alphabet.indexOf(char) !== -1 ? alphabet.indexOf(char) : char)
 		// get new index of character
+		// if is NaN then is character are is not in alphabet and we do not process it
 		.map(item => classOf(item) === 'Number' ? item + shift : item)
 		// processing of exceeding the limit
 		.map(item => classOf(item) === 'Number' ? (alphabet.length + (item % alphabet.length)) % alphabet.length : item)
@@ -68,6 +69,7 @@ export const affine = (message, alphabet, a, b) => {
 		// replace characters to indexes in alphabet
 		.map(item => alphabet.indexOf(item) !== -1 ? alphabet.indexOf(item) : item)
 		// use encryption function
+		// if is NaN then is character are is not in alphabet and we do not process it
 		.map(item => classOf(item) === 'Number' ? (a * item + b) % alphabet.length :  item)
 		// processing of exceeding the limit
 		.map(item => classOf(item) === 'Number' ? (alphabet.length + (item % alphabet.length)) % alphabet.length : item)
@@ -88,7 +90,7 @@ export const affine = (message, alphabet, a, b) => {
  * @return {string} Result of encrypt/decrypt
  */
 export const autokey = (message, alphabet, key, decrypt) => {
-	message = String(message).split(''); // make String from anything and transform to array
+	message = String(message).split(''); // make String from anything and convert to Array
 	alphabet = string.removeDuplicates(alphabet);
 	key = isNaN(parseInt(key, 10)) ? 0 : parseInt(key, 10);
 
@@ -103,16 +105,15 @@ export const autokey = (message, alphabet, key, decrypt) => {
 
 	message = message
 		// remove characters which are not in alphabet
-		.filter(item => {
-			return alphabet.indexOf(item) !== -1;
-		})
+		.filter(item => alphabet.indexOf(item) !== -1)
 		// replace characters to indexes in alphabet
 		.map(item => alphabet.indexOf(item))
-		// use encryption function
+		// use encryption/decryption function
+		// if is NaN then is character are is not in alphabet and we do not process it
 		.map((item, index) => {
 			keys.push(decrypt ? item - keys[index] : item);
 			return classOf(item) === 'Number'
-				? ( item + (decrypt ? -keys[index] : keys[index]) ) % alphabet.length
+				? ( item + (decrypt ? -keys[index] : keys[index]) ) % alphabet.length // if decrypt - get revert index
 				: item;
 		})
 		// processing of exceeding the limit
@@ -126,4 +127,45 @@ export const autokey = (message, alphabet, key, decrypt) => {
 	return message.join(''); // return string
 };
 
-window.autokey = autokey;
+export const vigenere = (message, alphabet, key, decrypt) => {
+	message = String(message).split(''); // make String from anything and transform to array
+	alphabet = string.removeDuplicates(alphabet);
+	key = String(key); // cipher key
+
+	// save indexes of characters which are not in alphabet
+	let unexpectedSymbols = [];
+	message.forEach((item, index) => {
+		if (alphabet.indexOf(item) === -1) {
+			unexpectedSymbols[index] = item;
+		}
+	});
+
+	// make key length to greater or equal message length
+	while (key.length < message.length) {
+		key += key;
+	}
+
+	key = key
+		.slice(0, message.length) // make key length to equal message length
+		.split('') // convert to Array
+		.map(char => alphabet.indexOf(char) !== -1 ? alphabet.indexOf(char) : char) // replace characters to indexes
+		.filter(char => classOf(char) === 'Number'); // remove characters which are not in alphabet
+
+	message = message
+		// remove characters which are not in alphabet
+		.filter(item => alphabet.indexOf(item) !== -1)
+		// replace characters to indexes in alphabet
+		.map(char => alphabet.indexOf(char) !== -1 ? alphabet.indexOf(char) : char)
+		// use encryption/decryption function
+		// if is NaN then is character are is not in alphabet and we do not process it
+		.map((item, index) => classOf(item) === 'Number' ? item + (decrypt ? -key[index] : key[index]) : item)
+		// processing of exceeding the limit
+		.map(item => classOf(item) === 'Number' ? (alphabet.length + (item % alphabet.length)) % alphabet.length : item)
+		// replace each charCode to character
+		.map(item => classOf(item) === 'Number' ? alphabet[item] :  item);
+
+	// restore characters which are not in alphabet
+	unexpectedSymbols.forEach((item, index) => message.splice(index, 0, item));
+
+	return message.join(''); // return string
+};

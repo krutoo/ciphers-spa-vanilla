@@ -1,12 +1,12 @@
 import Component from './Component';
 import Textarea from './Textarea';
 import Input from './Input';
-import { autokey } from '../helpers/ciphers';
+import { vigenere } from '../helpers/ciphers';
 
 /**
- * Autokey cipher form component class
+ * Vigenere cipher form component class
  */
-export default class AutokeyForm extends Component {
+export default class VigenereForm extends Component {
 	constructor(options) {
 		super(options);
 		this.data = {
@@ -16,15 +16,15 @@ export default class AutokeyForm extends Component {
 		};
 		this.children = {
 			messageField: new Textarea({
-				id: 'autokey-message-field',
+				id: 'vigenere-message-field',
 				rows: 5,
 				className: 'full-width',
 				placeholder: 'Сообщение',
 				onchange: `${this.passToAttribute('update')}({message: this.value, encrypted: this.value});`,
 			}),
 			keyField: new Input({
-				id: 'autokey-key-field',
-				type: 'number',
+				id: 'vigenere-key-field',
+				type: 'text',
 				className: 'full-width',
 				placeholder: 'Ключ шифра',
 				onchange: `${this.passToAttribute('update')}({key: this.value});`,
@@ -37,7 +37,7 @@ export default class AutokeyForm extends Component {
 	 */
 	encrypt() {
 		this.update({
-			encrypted: autokey(this.data.message, this.options.alphabet, this.data.key),
+			encrypted: vigenere(this.data.message, this.options.alphabet, this.data.key),
 		});
 		this.children.messageField.render({
 			value: this.data.encrypted,
@@ -49,7 +49,7 @@ export default class AutokeyForm extends Component {
 	 */
 	decrypt() {
 		this.update({
-			message: autokey(this.data.encrypted, this.options.alphabet, this.data.key, true),
+			message: vigenere(this.data.encrypted, this.options.alphabet, this.data.key, true),
 		});
 		this.children.messageField.render({
 			value: this.data.message,
@@ -60,13 +60,13 @@ export default class AutokeyForm extends Component {
 	template() {
 		return `
 			<section>
-				<h2>Автоключевой шифр</h2>
-				<label for="autokey-message-field">Исходное сообщение</label>
+				<h2>Шифр Виженера</h2>
+				<label for="vigenere-message-field">Исходное сообщение</label>
 				${this.children.messageField.render({
 					value: this.data.message,
 				})}
 				<br>
-				<label for="autokey-key-field">Ключ шифра</label>
+				<label for="vigenere-key-field">Ключ шифра</label>
 				${this.children.keyField.render({
 					value: this.data.key,
 				})}
