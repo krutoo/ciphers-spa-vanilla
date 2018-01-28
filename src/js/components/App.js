@@ -37,7 +37,7 @@ export default class App extends Component {
 			}),
 			vigenereForm: new VigenereForm({
 				alphabet: this.data.alphabet,
-			})
+			}),
 		};
 	}
 

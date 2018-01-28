@@ -140,7 +140,11 @@ export const vigenere = (message, alphabet, key, decrypt) => {
 		}
 	});
 
-	while (key.length < message.length) key += key; // make key length to greater or equal message length
+	// make key length to greater or equal message length
+	while (key.length < message.length) {
+		key += key;
+	}
+
 	key = key
 		.slice(0, message.length) // make key length to equal message length
 		.split('') // convert to Array
