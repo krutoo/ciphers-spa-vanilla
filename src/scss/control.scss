@@ -13,7 +13,7 @@ button {
 	padding: .5rem;
 	background-color: transparent;
 	color: inherit;
-	border: .2rem solid $input-primary-color;
+	border: 1px solid $input-primary-color;
 	border-radius: $input-border-radius;
 	transition: box-shadow .2s ease-in-out;
 
@@ -25,7 +25,7 @@ button {
 input:focus,
 textarea:focus,
 button:focus {
-	box-shadow: 0 0 0 .2rem $input-focus-color;
+	box-shadow: 0 0 0 .1rem $input-focus-color;
 	border-color: $input-focus-color;
 }
 
